@@ -21,8 +21,11 @@ try {
     email,
     password,
   });
+  console.log(user);
+  
 if(user) {
   routes.push('/')
+  localStorage.setItem('token',user.data)
   
 }
 } catch (error) {
