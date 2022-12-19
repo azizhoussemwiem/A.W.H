@@ -15,7 +15,7 @@ app.post("/signup", usersController.signup);
 app.post("/login", usersController.login);
 app.get("/logout", usersController.logout);
 
-
+app.get("/user/:name",usersController.getUserByName)
 
 
 

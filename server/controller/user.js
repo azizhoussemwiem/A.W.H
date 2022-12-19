@@ -57,20 +57,20 @@ async function login(req, res) {
 
   // Create a jwt token
   const exp = Date.now() + 1000 * 60 * 60 * 24 * 30; // one month 
-  const token = jwt.sign({ sub: user._id, exp }, process.env.JWT_KEY); //sub : subject and exp : Expiration Time in jwt 
+  const token = jwt.sign({ sub: user.name, exp }, process.env.JWT_KEY); //sub : subject and exp : Expiration Time in jwt 
 
   // Set the cookie
 
-  res.cookie("Authorization", token, {
-    expires: new Date(exp),
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-  });
+  // res.cookie("Authorization", token, {
+  //   expires: new Date(exp),
+  //   httpOnly: true,
+  //   sameSite: "lax",
+  //   secure: process.env.NODE_ENV === "production",
+  // });
 
   // Send it
 
-  res.sendStatus(200);
+  res.json(token);
 
 }catch(err){
 
@@ -99,8 +99,15 @@ function checkAuth(req, res){
 function update() {
     
 }
+const getUserByName=async(req,res)=>{
+  User.findOne({name:req.params.name},(err,result)=>{
+    if (err) res.status(401),json(result)
+    else res.json(result)
+  })
+}
 
 module.exports = {
+  getUserByName,
   signup,
   login,
   logout,
