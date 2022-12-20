@@ -11,6 +11,15 @@ const getAllProduct = (req, res) => {
         .json({ message: 'products not found', error: err.message });
     });
 };
+const getAllClothes = async (req, res) => {
+  try {
+    await Product.find({ category: req.params.category }).then((result) => {
+      res.json(result);
+    });
+  } catch (err) {
+    res.json(err);
+  }
+};
 
 const oneProduct = (req, res) => {
   Product.find(req.body)
@@ -63,4 +72,5 @@ module.exports = {
   deleteProduct,
   updateProduct,
   oneProduct,
+  getAllClothes,
 };

@@ -7,17 +7,16 @@ import AllProduct from './AllProduct.js';
 
 import { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-export default function Clothes() {
+export default function Shoes() {
   const allProd = useContext(AllProduct);
-  console.log(allProd, "prods");
-  
-  const clothes = allProd.products.filter((e: any) => e.category === 'clothes');
+  const shoes = allProd.products.filter((e: any) => e.category === 'shoes');
+  // const [shoes, setShoes] = useState([]);
 
   return (
     <>
       <NavBar />
 
-      {clothes.map((e: any) => {
+      {shoes.map((e: any) => {
         return (
           <CardGroup id="groupitems" key={e._id}>
             <Card className="groupitemCard">
@@ -36,7 +35,8 @@ export default function Clothes() {
                 // data-item-description={e.description}
                 data-item-image={e.image}
                 data-item-name={e.name}
-              >Add to cart
+              >
+                Add to cart
               </Button>
 
               <Card.Footer>

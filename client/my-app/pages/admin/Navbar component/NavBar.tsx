@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 // import { useSnipcart } from 'use-snipcart';
+import Link from "next/link"
 
 export default function NavBar() {
   const [searchView, setSearcView] = useState(false);
@@ -88,9 +89,12 @@ export default function NavBar() {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body className="categorieHover">
-            <a href="/Clothes">
-              <h3>Clothes</h3>
-            </a>
+            <Link href="/admin/AClothes" >
+              <h3 onClick={(e)=>{
+                
+console.log("wiwi");
+              }}>Clothes</h3>
+            </Link>
             <a href="/Shoes">
               <h3>Shoes</h3>
             </a>
