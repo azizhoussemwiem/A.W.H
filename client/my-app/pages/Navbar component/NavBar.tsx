@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 // import { useSnipcart } from 'use-snipcart';
+import Link from "next/link";
+
+
 
 export default function NavBar() {
   const [searchView, setSearcView] = useState(false);
 
   const [smShow, setSmShow] = useState(false);
   // const { cart = {} } = useSnipcart();
+  const [data, setData] = useState({});
 
   return (
     <>
@@ -19,7 +23,10 @@ export default function NavBar() {
         <nav id="secondaryNav">
           <ul>
             <li>
-              <button className="snipcart-checkout" style={{background : 'black' , border:"black"}}>
+              <button
+                className="snipcart-checkout"
+                style={{ background: "black", border: "black" }}
+              >
                 <img src="cart.png" alt="" className="favoriteImage" />
                 {/* <span>${cart.subtotal?.toFixed(2)}</span> */}
               </button>
@@ -34,21 +41,33 @@ export default function NavBar() {
 
         <nav className="searchNav">
           <ul>
-            {searchView ? (
-              <li>
-                <input type="text" className="inputSearch" />
-              </li>
-            ) : null}
             <li>
-              <a href="#">
-                <img
-                  src="search-icon-png.png"
-                  alt=""
-                  onClick={() => {
-                    setSearcView(true);
-                  }}
-                />
-              </a>
+              <input
+                type="text"
+                className="inputSearch"
+                onChange={(e) => {
+                  setData({name : e.target.value});
+                }}
+              />
+            </li>
+
+            <li>
+              <Link
+                href={{
+                  pathname: "/Search",
+                  query: data, // the data
+                }}
+              >
+                  <img
+                    src="search-icon-png.png"
+                    alt=""
+                    onClick={() => {
+                      setSearcView(true);
+                      console.log(data);
+                      
+                    }}
+                  />
+              </Link>
             </li>
           </ul>
         </nav>
@@ -60,8 +79,8 @@ export default function NavBar() {
             </li>
             <li>
               <a href="#" onClick={() => setSmShow(true)}>
-                {' '}
-                Categories{' '}
+                {" "}
+                Categories{" "}
               </a>
             </li>
             {/* <li>

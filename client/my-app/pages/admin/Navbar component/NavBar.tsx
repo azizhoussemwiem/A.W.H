@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState , useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 // import { useSnipcart } from 'use-snipcart';
 import Link from "next/link"
+import { queryy } from '../AllProduct';
 
 export default function NavBar() {
   const [searchView, setSearcView] = useState(false);
 
   const [smShow, setSmShow] = useState(false);
   // const { cart = {} } = useSnipcart();
+  const qu = useContext(queryy)
+  const [query, setQuery] = useState();
+
 
   return (
     <>
@@ -35,18 +39,21 @@ export default function NavBar() {
 
         <nav className="searchNav">
           <ul>
-            {searchView ? (
+          
               <li>
-                <input type="text" className="inputSearch" />
+                <input type="text" className="inputSearch" onChange={(e)=>{setQuery(e.target.value)}}/>
               </li>
-            ) : null}
+          
             <li>
               <a href="#">
                 <img
                   src="search-icon-png.png"
                   alt=""
                   onClick={() => {
-                    setSearcView(true);
+                   
+                      console.log(query);
+                      setSearcView(false)
+                    
                   }}
                 />
               </a>
@@ -61,8 +68,7 @@ export default function NavBar() {
             </li>
             <li>
               <a href="#" onClick={() => setSmShow(true)}>
-                {' '}
-                Categories{' '}
+                Categories
               </a>
             </li>
             {/* <li>
