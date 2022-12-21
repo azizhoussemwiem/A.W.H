@@ -32,6 +32,17 @@ const oneProduct = (req, res) => {
         .json({ message: 'product not found', error: err.message });
     });
 };
+const search = (req, res) => {
+  Product.find({ name: {$regex :req.params.search}  })
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res
+        .status(404)
+        .json({ message: "product not found", error: err.message });
+    });
+};
 const addProduct = (req, res) => {
   Product.create(req.body)
     .then((data) => {
@@ -72,5 +83,6 @@ module.exports = {
   deleteProduct,
   updateProduct,
   oneProduct,
+  search,
   getAllClothes,
 };
