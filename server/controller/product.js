@@ -20,6 +20,15 @@ const getAllClothes = async (req, res) => {
     res.json(err);
   }
 };
+const getAllShoes = async (req, res) => {
+  try {
+    await Product.find({ category: req.params.category }).then((result) => {
+      res.json(result);
+    });
+  } catch (err) {
+    res.json(err);
+  }
+};
 
 const oneProduct = (req, res) => {
   Product.find(req.body)
@@ -54,23 +63,40 @@ const deleteProduct = (req, res) => {
     });
 };
 
-const updateProduct = (req, res) => {
-  Product.findByIdAndUpdate(req.params._id, req.body)
-    .then((data) => {
-      res.status(200).json({ message: 'yayy updated', data });
-    })
-    .catch((err) => {
-      res
-        .status(404)
-        .json({ message: 'Product not found', error: err.message });
-    });
+// const updateProduct = (req, res) => {
+//   Product.findByIdAndUpdate(req.params._id, req.body)
+//     .then((data) => {
+//       res.status(200).json({ message: 'yayy updated', data });
+//     })
+//     .catch((err) => {
+//       res
+//         .status(404)
+//         .json({ message: 'Product not found', error: err.message });
+//     });
+// };
+const UpdateProduct = async (req, res) => {
+  try {
+    Product.findOneAndUpdate( req.body._id ,
+        
+      { name: req.body.name, price: req.body.price},
+      {image: req.body.image },
+    
+      (err, result) => {
+        if (err) console.log(err);
+        res.json(result);
+      }
+    );
+  } catch (err) {
+    res.json(err);
+  }
 };
-
 module.exports = {
   getAllProduct,
   addProduct,
   deleteProduct,
-  updateProduct,
+  
   oneProduct,
   getAllClothes,
+  UpdateProduct,
+  getAllShoes,
 };
