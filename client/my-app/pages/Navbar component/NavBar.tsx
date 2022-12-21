@@ -83,9 +83,9 @@ export default function NavBar() {
                 Categories{" "}
               </a>
             </li>
-            {/* <li>
-              <a href="#">About us</a>
-            </li> */}
+             <li>
+              <a href="Aboutus">About us</a>
+            </li> 
             <li>
               <a href="Login"> Login </a>
             </li>
@@ -123,5 +123,8 @@ export default function NavBar() {
         </Modal>
       </>
     </>
+   
+    
+    
   );
 }

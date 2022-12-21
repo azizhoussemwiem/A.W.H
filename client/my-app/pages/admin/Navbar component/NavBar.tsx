@@ -71,9 +71,7 @@ export default function NavBar() {
                 Categories
               </a>
             </li>
-           <li>
-            <a href="">About us </a>
-           </li>
+           
             <li>
               <a href="Login"> Login </a>
             </li>
