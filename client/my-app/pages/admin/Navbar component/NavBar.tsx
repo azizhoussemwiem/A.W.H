@@ -57,7 +57,7 @@ export default function NavBar() {
         <nav className="navbar">
           <ul>
             <li>
-              <a href="/"> Home </a>
+              <a  href="/"> Home </a>
             </li>
             <li>
               <a href="#" onClick={() => setSmShow(true)}>
@@ -65,9 +65,9 @@ export default function NavBar() {
                 Categories{' '}
               </a>
             </li>
-            {/* <li>
-              <a href="#">About us</a>
-            </li> */}
+           <li>
+            <a href="">About us </a>
+           </li>
             <li>
               <a href="Login"> Login </a>
             </li>
