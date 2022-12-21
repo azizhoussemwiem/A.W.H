@@ -37,7 +37,7 @@ if(user) {
   return (
     <div
       style={{
-        backgroundColor: "gray",
+        backgroundColor: "white",
         backgroundPosition: "center",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
@@ -104,7 +104,7 @@ if(user) {
 
                         <div className="text-center pt-1 mb-5 pb-1">
                           <button
-                            className="btn btn-block fa-lg  toggleColor mb-3"
+                            className="btn btn-outline-warning toggleColor mb-3"
                             type="submit"
                           >
                             Login
