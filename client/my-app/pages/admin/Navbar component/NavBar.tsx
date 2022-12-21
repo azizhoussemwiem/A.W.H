@@ -99,7 +99,7 @@ export default function NavBar() {
 console.log("wiwi");
               }}>Clothes</h3>
             </Link>
-            <a href="/Shoes">
+            <a href="/admin/AShoes">
               <h3>Shoes</h3>
             </a>
             <a href="/Accessories">
