@@ -19,7 +19,15 @@ const [Uimage,setUimage]=useState("")
   const allProd = useContext(AllProduct);
   const UpdateElement = (element: any, body: any) => {
     axios
-      .put(`http://localHost:8080/product/${element}`, body)
+      .put(`http://localHost:8080/product/${element}`, body).then((res)=>{
+
+      axios.get("http://localHost:8080/product/clothes").then((res) => {
+        console.log(res.data, "sous");
+        setclothes(res.data);
+      });
+        showInput()
+
+      })
       .catch((err) => alert("an error occured"));
   };
 
@@ -52,7 +60,7 @@ const [Uimage,setUimage]=useState("")
     <>
       <NavBar />
 
-      {clothes.map((e: any) => {
+      {clothes.map((e: any ) => {
         return (
           <CardGroup id="groupitems" key={e._id}>
             <Card className="groupitemCard">
@@ -63,7 +71,7 @@ const [Uimage,setUimage]=useState("")
                   
                 }}/> :<Card.Title> {e.name} </Card.Title>}
                 {show ? <input type="text" placeholder = {e.description} onChange={(e)=>{setUdescription(e.target.value)}}/> :<Card.Text>{e.description}</Card.Text>}
-              </Card.Body>10
+              </Card.Body>
               {show ? <input type="text" placeholder = {e.price} onChange={(e)=>{
                 setUprice(e.target.value)
               }}/> :<h2>${e.price}</h2>}
@@ -104,7 +112,7 @@ const [Uimage,setUimage]=useState("")
               >
                 update
               </button>
-             { show ? <button onClick={() => UpdateElement(e._id,{"name":"Uname","image":"Uimage","price":"Uprice"}) }>Save </button> : console.log('h') }
+             { show ? <button onClick={() => UpdateElement(e._id,{"name":Uname,"image":Uimage,"price":Uprice, "description":Udescription}) }>Save </button> : console.log('h') }
             </Card>
           </CardGroup>
         );

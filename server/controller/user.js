@@ -101,7 +101,7 @@ function update() {
 }
 const getUserByName=async(req,res)=>{
   User.findOne({name:req.params.name},(err,result)=>{
-    if (err) res.status(401),json(result)
+    if (err) res.status(401).json(result)
     else res.json(result)
   })
 }

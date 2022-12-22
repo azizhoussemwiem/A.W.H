@@ -8,15 +8,37 @@ import AllProduct from '../AllProduct.js';
 import { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 export default function Shoes() {
-
+  const [Uname,setUname]=useState("")
+  const [Uprice,setUprice]=useState(0)
+  const [Udescription,setUdescription]=useState("")
+  const [Uimage,setUimage]=useState("")
+  const [show, setShow] = useState(false)
   
-  const [Shoes , setShoes]=useState([])
+  const [shoes , setshoes]=useState([])
   useEffect(() => {
     axios.get("http://localHost:8080/product/shoes").then((res) => {
       console.log(res.data ,"sous");
-      setShoes(res.data);
+      setshoes(res.data);
     });
   }, []);
+
+  const UpdateElement = (element: any, body: any) => {
+    axios
+      .put(`http://localHost:8080/product/${element}`, body).then((res)=>{
+
+      axios.get("http://localHost:8080/product/shoes").then((res) => {
+        console.log(res.data, "sous");
+        setshoes(res.data);
+      });
+        showInput()
+
+      })
+      .catch((err) => alert("an error occured"));
+  };
+
+  let showInput = () => {
+    setShow(!show)
+  }
 
 
   // const allProd = useContext(AllProduct);
@@ -47,12 +69,15 @@ export default function Shoes() {
         return (
           <CardGroup id="groupitems" key={e._id}>
             <Card className="groupitemCard">
-              <Card.Img variant="top" src={e.image} />
+              {show ? <input type="text" placeholder = {e.image} onChange={(e)=>{setUimage(e.target.value)}}/> :<Card.Img variant="top" src={e.image} />}
               <Card.Body>
-                <Card.Title> {e.name} </Card.Title>
-                <Card.Text>{e.description}</Card.Text>
+                {show ? <input type="text" placeholder = {e.name} onChange={(e)=>{
+                  setUname(e.target.value)
+                  
+                }}/> :<Card.Title> {e.name} </Card.Title>}
+                {show ? <input type="text" placeholder = {e.description} onChange={(e)=>{setUdescription(e.target.value)}}/> :<Card.Text>{e.description}</Card.Text>}
               </Card.Body>
-              <h2>${e.price}</h2>
+              {show ? <input type="text" placeholder = {e.price} onChange={(e)=>{setUprice(e.target.value) }}/> :<h2>${e.price}</h2>}
 
               <Button
                 variant="outline-dark"
@@ -82,9 +107,17 @@ export default function Shoes() {
   delete
 </button>
 <br></br>
-              <button className=" hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" style={{background:"black"}}>
-  update
-</button>
+<button
+                className=" hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+                style={{ background: "black" }}
+                onClick={() => {
+                  showInput()
+                  
+                }}
+              >
+                update
+              </button>
+             { show ? <button onClick={() => UpdateElement(e._id,{"name":Uname,"image":Uimage,"price":Uprice, "description":Udescription}) }>Save </button> : console.log('h') }
             </Card>
           </CardGroup>
         );

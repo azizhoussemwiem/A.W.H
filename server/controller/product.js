@@ -86,20 +86,15 @@ const deleteProduct = (req, res) => {
 //     });
 // };
 const UpdateProduct = async (req, res) => {
-  try {
-    Product.findOneAndUpdate( req.body._id ,
+ 
+    Product.findOneAndUpdate({ _id:req.params._id} ,
         
-      { name: req.body.name, price: req.body.price},
-      {image: req.body.image },
+     req.body,
     
       (err, result) => {
         if (err) console.log(err);
-        res.json(result);
-      }
-    );
-  } catch (err) {
-    res.json(err);
-  }
+        res.json(result);}
+    )
 };
 module.exports = {
   getAllProduct,
