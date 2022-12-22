@@ -1,28 +1,30 @@
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
-import Button from 'react-bootstrap/Button';
+import Card from "react-bootstrap/Card";
+import CardGroup from "react-bootstrap/CardGroup";
+import Button from "react-bootstrap/Button";
 
-import NavBar from './Navbar component/NavBar';
+import NavBar from "./Navbar component/NavBar";
+import AllProduct from "./AllProduct.js";
 
+import { useState, useContext, useEffect } from "react";
+import axios from "axios";
+import { queryy } from "./admin/AllProduct";
+import { useRouter } from "next/router";
 
-
-
-import { useState, useContext, useEffect } from 'react';
-import axios from 'axios';
-import AllProduct from '../AllProduct.js';
-
-export default function Accessories() {
-  // const [accessories, setAcc] = useState([]);
+export default function Search() {
   const allProd = useContext(AllProduct);
-  const accessories = allProd.products.filter(
-    (e: any) => e.category === 'accessories'
-  );
+
+  const router = useRouter();
+  const query = router.query;
+  const x = query.name
+  console.log(query, "*******");
+  const search = allProd.products.filter((e: any) => e.name.includes(x));
+  console.log("=====>", x);
 
   return (
     <>
       <NavBar />
 
-      {accessories.map((e: any) => {
+      {search.map((e: any) => {
         return (
           <CardGroup id="groupitems" key={e._id}>
             <Card className="groupitemCard">
@@ -42,7 +44,7 @@ export default function Accessories() {
                 data-item-image={e.image}
                 data-item-name={e.name}
               >
-               Add to cart
+                Add to cart
               </Button>
 
               <Card.Footer>

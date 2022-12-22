@@ -23,7 +23,7 @@ export default function Home() {
 
 
       <main className={styles.main}>
-         <h1 id="forHer"> For her </h1>
+         <img id="forHer" src="https://jpl.a.bigcontent.io/v1/static/desktop-middle-banner-1704x740-fffb7009e9105d02cd60581b09c3c898" alt="" />
             <SlidesWomen/>
         <br/> <br/> <br/> <br/> <br/><br/>
             <ProSlides/>
